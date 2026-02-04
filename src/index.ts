@@ -7,6 +7,7 @@ import indexRouter from './routes/index.routes.js'
 import adminRouter from './routes/admin.routes.js'
 import postsRouter from './routes/posts.routes.js'
 import { join } from 'node:path';
+import { authMiddleware } from './middlewares/auth.js';
 
 const app: Application = express();
 
@@ -26,7 +27,7 @@ app.set('view engine', 'handlebars')
 app.set('views', join('views'))
 
 app.use('/', indexRouter)
-app.use('/admin', adminRouter)
+app.use('/admin', authMiddleware, adminRouter)
 app.use('/posts', postsRouter)
 
 app.listen(port, () => {

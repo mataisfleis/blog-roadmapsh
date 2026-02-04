@@ -1,0 +1,6 @@
+<h1>Hello admin!</h1>
+<ul>
+  {{#each posts}}
+    <li><a href="/posts/{{this.id}}">{{this.title}} - {{formatDate this.date}}</a></li>
+  {{/each}}
+</ul>
