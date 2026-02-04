@@ -15,7 +15,7 @@ export async function getPosts(){
 export async function getPost(id: string){
   const  request = await axios.get(db_url + `/posts?id=${id}`)
 
-  return request.data
+  return request.data[0]
 }
 
 export async function createPost(title: string, content: string){
