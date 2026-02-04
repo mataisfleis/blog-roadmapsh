@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { join } from 'node:path';
+import type { Post } from './types/post.js';
 
 const db_url = process.env.DB_URL as string
 
@@ -26,6 +27,15 @@ export async function createPost(title: string, content: string){
 
 export async function deletePost(id: string){
   const request = await axios.delete(`/posts?id=${id}`)
+
+  return request.data
+}
+
+export async function updatePost(id: string, title: string | undefined, content: string | undefined){
+  let newData: Partial<Post> = {}
+  if(title !== undefined) newData["title"] = title
+  if(content !== undefined) newData["content"] = btoa(content)
+  const request = await axios.patch(db_url + `/posts?id=${id}`, newData)
 
   return request.data
 }
