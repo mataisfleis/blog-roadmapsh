@@ -26,6 +26,8 @@ app.engine("handlebars", hbs.engine)
 app.set('view engine', 'handlebars')
 app.set('views', join('views'))
 
+app.use(express.urlencoded({extended: true}))
+
 app.use('/', indexRouter)
 app.use('/admin', authMiddleware, adminRouter)
 app.use('/posts', postsRouter)
