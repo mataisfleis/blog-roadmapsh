@@ -1,0 +1,9 @@
+<form action="/admin/edit/{{post.id}}/post" method="post">
+  <label for="title">Title</label>
+  <input name="title" id="form-title" type="text" value="{{post.title}}">
+
+  <label for="form-content">Content</label>
+  <textarea name="content" id="form-content" value>{{decodedContent}}</textarea>
+
+  <button type="submit">Submit</button>
+</form>

@@ -35,7 +35,7 @@ export async function updatePost(id: string, title: string | undefined, content:
   let newData: Partial<Post> = {}
   if(title !== undefined) newData["title"] = title
   if(content !== undefined) newData["content"] = btoa(content)
-  const request = await axios.patch(db_url + `/posts?id=${id}`, newData)
+  const request = await axios.patch(db_url + `/posts/${id}`, newData)
 
   return request.data
 }

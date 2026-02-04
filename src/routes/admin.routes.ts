@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createPost, getPosts } from '../db.js';
+import { createPost, getPosts, getPost, updatePost } from '../db.js';
 import type { Post } from '../types/post.js';
 
 const router: Router = Router()
@@ -23,5 +23,23 @@ router.post('/new/post', async (req, res) => {
 
   res.redirect('/admin')
 })
+
+router.get('/edit/:id', async (req, res) => {
+  const id = req.params.id
+  const post = await getPost(id)
+  const decodedContent = atob(post.content)
+  res.render("editPost", {
+    post, decodedContent
+  })
+})
+
+router.post('/edit/:id/post', async (req, res) => {
+  const id = req.params.id
+  const {title, content} = req.body
+  await updatePost(id, title, content)
+
+  res.redirect('/admin')
+})
+
 
 export default router
