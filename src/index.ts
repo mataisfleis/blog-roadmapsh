@@ -1,5 +1,5 @@
 import express from 'express';
-import { engine } from 'express-handlebars';
+import { create } from 'express-handlebars';
 import type {Application} from 'express'
 import 'dotenv/config'
 
@@ -12,7 +12,16 @@ const app: Application = express();
 
 const port = process.env.PORT || 3000;
 
-app.engine("handlebars", engine())
+const hbs = create({
+  helpers: {
+    formatDate: (date: number) =>{
+      const dateConstructor = new Date(date)
+      return `${dateConstructor.getDate()}/${dateConstructor.getMonth() + 1}/${dateConstructor.getFullYear()}`
+    }  
+  }
+})
+
+app.engine("handlebars", hbs.engine)
 app.set('view engine', 'handlebars')
 app.set('views', join('views'))
 
