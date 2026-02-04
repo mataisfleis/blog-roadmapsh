@@ -3,3 +3,4 @@ dist
 pnpm-lock.yaml
 .env
 pnpm-workspace.yaml
+db/db.json
